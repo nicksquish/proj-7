@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import Map from './Map'
 import './App.css'
 import SquareAPI from './Foursquare'
+import Sidebar from './Sidebar'
 
 class App extends Component {
 
@@ -9,59 +10,51 @@ class App extends Component {
     super()
     this.state = {
       venues: [],
-      markers: [],
-      
+      markers: []
     }
+  }
+
+  closeMarkers = () => {
+    const markers = this.state.markers.map(marker => {
+      marker.isOpen = false
+      return marker
+    })
+    this.setState({markers: Object.assign(this.state.markers, markers)})
+  }
+
+  handleMarkerClick = (marker) => {
+    this.closeMarkers()
+    console.log(marker)
+    marker.isOpen = true
+    this.setState({markers: Object.assign(this.state.markers, marker)})
   }
 
   componentDidMount() {
     SquareAPI.search({
-      near: 'Chicago, IL',
-      query: 'fun',
-      limit: 15
-    }).then(results => console.log(results))
-    // this.getVenues()
-    // this.getMarkers()
-  }
-
-  // getVenues = () => {
-  //   const endPoint = 'https://api.foursquare.com/v2/venues/explore?'
-  //   const parameters = {
-  //     client_id: 'HM4UUEGOD54Z05TFCFWL04IZURSAOJK4XE3W4O0HAWNVWJLV',
-  //     client_secret: '55IUQMXWYAUOVQOYTGZX50E4YAQ5VVDJK03Y3UODBFUDSMW5',
-  //     v: '20181019',
-  //     ll: '41.991431, -87.676839'
-  //   }
-
-  //   axios.get(endPoint + new URLSearchParams(parameters))
-  //     .then(response => {
-  //       this.setState({venues: response.data.response.groups[0].items})       
-  //       console.log(response)
-  //     })
-  //     .catch(error => {
-  //       console.log(error)
-  //     })
-  // }
-  // getMarkers = () => {
-  //   const markers = this.state.venues.map(venue => {
-  //         return {
-  //           position: {lat: venue.location.lat, 
-  //                    lng: venue.location.lng},
-  //           isOpen: false,
-  //           isVisible: true,
-  //           title: venue.name,
-  //           id: venue.id
-  //         }
-  //       })
-
-  //       this.setState({markers})
-  // }
-
+      near: '60660',
+      query: 'tacos',
+      limit: 10
+    }).then(results => {
+      const { venues } = results.response
+      const markers = venues.map(venue => {
+        return {
+          lat: venue.location.lat,
+          lng: venue.location.lng,
+          isOpen: false,
+          isVisible: true
+        }
+      })
+      this.setState({ venues, markers })
+      console.log(results)
+  })
+}
   render() {
     return (
       <div className="App">
         
-        <Map {...this.state}/>
+        <Map {...this.state}
+        handleMarkerClick={this.handleMarkerClick}
+        />
 
       </div>
     );
