@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import { withScriptjs, withGoogleMap, GoogleMap, Marker, InfoWindow } from "react-google-maps"
 
 const MyMapComponent = withScriptjs(withGoogleMap((props) =>
-  <GoogleMap
+  <GoogleMap 
     defaultZoom={14}
     defaultCenter={{lat: 41.991431, lng: -87.676839}}
   >
@@ -19,7 +19,7 @@ const MyMapComponent = withScriptjs(withGoogleMap((props) =>
           {marker.isOpen && venueInfo.bestPhoto && (
             <InfoWindow>
               <React.Fragment>
-                <img src={`${venueInfo.bestPhoto.prefix}200x200${venueInfo.bestPhoto.suffix}`} alt={'Venue'}/>
+                <img src={`${venueInfo.bestPhoto.prefix}125x125${venueInfo.bestPhoto.suffix}`} alt={'Venue'}/>
                 <p>{venueInfo.name}</p>
               </React.Fragment>
           </InfoWindow>
@@ -38,7 +38,7 @@ export default class Map extends Component {
         isMarkerShown
         googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyCkHGlZDBCdb9zG3JyAgWPToFUH-6vlxq8"
         loadingElement={<div style={{ height: `100%` }} />}
-        containerElement={<div style={{ height: `400px` }} />}
+        containerElement={<div style={{ height: `100%`, width: `75%` }} />}
         mapElement={<div style={{ height: `100%` }} />}
       />
     )

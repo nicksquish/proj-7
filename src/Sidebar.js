@@ -16,19 +16,18 @@ export default class Sidebar extends Component {
 
 	handleChange = e => {
 		this.setState({ query: e.target.value })
-		console.log( this.state.query )
-		// const markers = this.props.venues.map(venue => {
-		// 	//const isMatched = venue.name.includes(e.target.value)
-		// 	//const marker = this.props.markers.find(marker = marker.id === venue.id)
-		// 	if(isMatched){
-		// 	marker.isVisible = true
-			
-		// 	} 	else {
-		// 	marker.isVisible = false
-		// }
-		// return marker
-		
-	}
+		const markers = this.props.venues.map(venue => {
+			const isMatched = venue.name.toLowerCase().includes(e.target.value.toLowerCase())
+			const marker = this.props.markers.find(marker => marker.id === venue.id)
+			if(isMatched){
+			marker.isVisible = true
+			} 	else {
+			marker.isVisible = false
+		}
+		return marker
+	})
+		this.props.updateSuperState({markers})
+}
 
 	render() {
 

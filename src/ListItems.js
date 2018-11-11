@@ -7,7 +7,7 @@ export default class ListItems extends Component {
 	render() {
 
 		return (<li className='listItems' onClick={() => this.props.handleVenueClick(this.props)}>
-			{this.props.venue.name}
+			{this.props.name}
 		</li>)
 	}
 }

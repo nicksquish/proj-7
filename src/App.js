@@ -10,7 +10,10 @@ class App extends Component {
     super()
     this.state = {
       venues: [],
-      markers: []
+      markers: [],
+      updateSuperState: obj => {
+        this.setState(obj)
+      }
     }
   }
 
@@ -22,7 +25,7 @@ class App extends Component {
     this.setState({markers: Object.assign(this.state.markers, markers)})
   }
 
-  handleMarkerClick = (marker) => {
+  handleMarkerClick = marker => {
     this.closeMarkers()
     console.log(marker)
     marker.isOpen = true
@@ -35,10 +38,16 @@ class App extends Component {
         })
   }
 
+  handleVenueClick = venue => {
+    const marker = this.state.markers.find(marker => marker.id === venue.id)
+    this.handleMarkerClick(marker)
+    console.log(venue.id)
+  }
+
   componentDidMount() {
     SquareAPI.search({
       near: '60660',
-      query: 'tacos',
+      query: 'restaurant',
       limit: 10
     }).then(results => {
       const { venues } = results.response
@@ -58,8 +67,9 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        
+        <Sidebar {...this.state} handleVenueClick={this.handleVenueClick}/>
         <Map {...this.state}
+        className='map'
         handleMarkerClick={this.handleMarkerClick}
         />
 
