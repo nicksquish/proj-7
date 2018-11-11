@@ -3,6 +3,7 @@ import ListItems from './ListItems'
 import App from './App'
 import './App.css';
 
+//component to contain list of venue names in sidebar
 export default class VenueList extends Component {
 
 	render() {

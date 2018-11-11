@@ -1,13 +1,16 @@
+//builds a url to request data from foursquare api
+//houses necessary authorization keys
+//parses returned data for use in app
 class Helper {
 	static baseURL() {
 		return 'https://api.foursquare.com/v2'
 	}
 	static auth() {
 		const keys = {
-			client_id: 'HM4UUEGOD54Z05TFCFWL04IZURSAOJK4XE3W4O0HAWNVWJLV',
-      client_secret: '55IUQMXWYAUOVQOYTGZX50E4YAQ5VVDJK03Y3UODBFUDSMW5',
-      v: '20181019',
-      ll: '41.991431, -87.676839'
+		  client_id: 'HM4UUEGOD54Z05TFCFWL04IZURSAOJK4XE3W4O0HAWNVWJLV',
+	    client_secret: '55IUQMXWYAUOVQOYTGZX50E4YAQ5VVDJK03Y3UODBFUDSMW5',
+	    v: '20181019',
+	    ll: '41.991431, -87.676839'
 		}
 		return Object.keys(keys)
 			.map(key => `${key}=${keys[key]}`)

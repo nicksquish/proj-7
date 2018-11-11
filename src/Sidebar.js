@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import VenueList from './VenueList'
 import './App.css';
-
+//sidebar to contain names of requested venues and allow for searching/filtering
 export default class Sidebar extends Component {
 	constructor() {
 		super()
@@ -10,7 +10,8 @@ export default class Sidebar extends Component {
 			venues: []
 		}
 	}
-
+//matches query in search bar with venues containing the same text. 
+//converts any capital letters in query to lowercase
 	handleFilterVenues = () => {
 		if (this.state.query.trim() != '') {
 			const venues = this.props.venues.filter(venue => venue.name
@@ -20,7 +21,7 @@ export default class Sidebar extends Component {
 		}
 		return this.props.venues
 	}
-
+//filter out any markers/listed venues if they do not match part of the search query
 	handleChange = e => {
 		this.setState({ query: e.target.value })
 		const markers = this.props.venues.map(venue => {

@@ -16,7 +16,7 @@ class App extends Component {
       }
     }
   }
-
+//close all other markers' infowindows on map when one has it's info window open
   closeMarkers = () => {
     const markers = this.state.markers.map(marker => {
       marker.isOpen = false
@@ -24,10 +24,9 @@ class App extends Component {
     })
     this.setState({markers: Object.assign(this.state.markers, markers)})
   }
-
+//opens targeted markers info window when clicked
   handleMarkerClick = marker => {
     this.closeMarkers()
-    console.log(marker)
     marker.isOpen = true
     this.setState({markers: Object.assign(this.state.markers, marker)})
     const venue = this.state.venues.find(venue => venue.id === marker.id)
@@ -37,13 +36,14 @@ class App extends Component {
       this.setState({venues:Object.assign(this.state.venues, newVenue)})
         })
   }
-
+//borrows handleMarkerClick's functionality to open the matching marker
+//when clicking on a listed venue in the sidebar
   handleVenueClick = venue => {
     const marker = this.state.markers.find(marker => marker.id === venue.id)
     this.handleMarkerClick(marker)
-    console.log(venue.id)
   }
-
+//utilize foursquare api to search for venues matching the requested query
+//maps over returned data to markers
   componentDidMount() {
     SquareAPI.search({
       near: '60660',
@@ -61,7 +61,6 @@ class App extends Component {
         }
       })
       this.setState({ venues, markers })
-      console.log(results)
   })
 }
   render() {

@@ -13,5 +13,29 @@ html, body {
 }
 
 .sidebar {
-  width: 25vw;
+  max-width: 25vw;
+  position: fixed;
 }
+
+#search{
+  width: 90%;
+  height: 5%;
+  margin-top: 1rem; 
+}
+
+.venueList {
+    padding: 1rem;
+  }
+
+.listItems {
+  font-size: 1rem;
+  padding: 0.5rem;
+  margin-top: 0.5rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  border-style: dotted;
+  border-width: 1px;
+}
+
+
